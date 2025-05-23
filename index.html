@@ -66,9 +66,9 @@
     const resultDiv = document.getElementById('result');
     const shortUrlInput = document.getElementById('shortUrl');
 
-    // 🌍 Automatically pick local or deployed backend
+    // ✅ Corrected backend port to match your local server (port 10000)
     const backendUrl = location.hostname === 'localhost'
-      ? 'http://localhost:5000'
+      ? 'http://localhost:10000'
       : 'https://url-shortener-backend-t3bb.onrender.com';
 
     form.onsubmit = async (e) => {
