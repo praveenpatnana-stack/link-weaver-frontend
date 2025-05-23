@@ -66,11 +66,16 @@
     const resultDiv = document.getElementById('result');
     const shortUrlInput = document.getElementById('shortUrl');
 
+    // 🌍 Automatically pick local or deployed backend
+    const backendUrl = location.hostname === 'localhost'
+      ? 'http://localhost:5000'
+      : 'https://url-shortener-backend-t3bb.onrender.com';
+
     form.onsubmit = async (e) => {
       e.preventDefault();
       const longUrl = urlInput.value;
       try {
-        const res = await fetch('https://url-shortener-backend-t3bb.onrender.com/api/shorten', {
+        const res = await fetch(`${backendUrl}/api/shorten`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ longUrl })
@@ -80,7 +85,7 @@
           shortUrlInput.value = data.shortUrl;
           resultDiv.classList.remove('hidden');
         } else {
-          alert('Failed to shorten URL.');
+          alert(data.message || 'Failed to shorten URL.');
         }
       } catch (err) {
         console.error(err);
