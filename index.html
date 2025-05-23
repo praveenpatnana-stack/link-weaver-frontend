@@ -16,11 +16,11 @@
           }
         }
       }
-    }
+    };
   </script>
 </head>
 <body class="bg-lightbg dark:bg-darkbg text-gray-800 dark:text-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
-  <button id="themeToggle" class="absolute top-4 right-4 bg-gray-200 dark:bg-gray-700 p-2 rounded"> Dark theme</button>
+  <button id="themeToggle" class="absolute top-4 right-4 bg-gray-200 dark:bg-gray-700 p-2 rounded">Dark theme</button>
 
   <div class="text-center space-y-4">
     <div class="flex justify-center">
@@ -90,8 +90,9 @@
 
     function copyShortUrl() {
       shortUrlInput.select();
-      document.execCommand('copy');
-      alert('Copied to clipboard!');
+      navigator.clipboard.writeText(shortUrlInput.value)
+        .then(() => alert('Copied to clipboard!'))
+        .catch(() => alert('Failed to copy.'));
     }
   </script>
 </body>
