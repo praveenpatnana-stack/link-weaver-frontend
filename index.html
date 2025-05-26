@@ -66,7 +66,7 @@
     const resultDiv = document.getElementById('result');
     const shortUrlInput = document.getElementById('shortUrl');
 
-    // 🔗 Always use deployed backend URL
+    // ✅ Always use deployed backend URL
     const backendUrl = 'https://url-shortener-backend-t3bb.onrender.com';
 
     form.onsubmit = async (e) => {
@@ -79,15 +79,17 @@
           body: JSON.stringify({ longUrl })
         });
         const data = await res.json();
+        console.log(data); // Debug log
+
         if (data.shortUrl) {
           shortUrlInput.value = data.shortUrl;
           resultDiv.classList.remove('hidden');
         } else {
-          alert(data.message || 'Failed to shorten URL.');
+          alert(data.message || 'Failed to shorten URL. Please try again.');
         }
       } catch (err) {
         console.error(err);
-        alert('Error contacting server.');
+        alert('Error contacting server. Make sure the backend is deployed.');
       }
     };
 
